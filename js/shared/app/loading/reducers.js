@@ -6,7 +6,7 @@ import t from './actionTypes';
 
 const defaultState = {
   login: false,
-  coins: false,
+  contacts: false,
 };
 
 const loading = (state = defaultState, action) => {
@@ -21,14 +21,14 @@ const loading = (state = defaultState, action) => {
         login: false,
       });
 
-    case t.COINS_LOADING:
+    case t.CONTACTS_LOADING:
       return Object.assign({}, state, {
-        coins: true,
+        contacts: true,
       });
 
-    case t.COINS_LOADED:
+    case t.CONTACTS_LOADED:
       return Object.assign({}, state, {
-        coins: false,
+        contacts: false,
       });
     default:
       return state;

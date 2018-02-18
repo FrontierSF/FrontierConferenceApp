@@ -5,6 +5,7 @@ const commonPages = {
   ENTRY: 'welcome',
   ERROR: 'error',
   SCHEDULE: 'schedule',
+  CONTACTS: 'contacts',
 };
 
 const pages = Object.assign({}, commonPages);

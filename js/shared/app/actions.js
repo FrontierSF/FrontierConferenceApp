@@ -22,27 +22,27 @@ export function initializeApp(root) {
       Navigation.startTabBasedApp({
         tabs: [
           {
-            screen: pages.SCHEDULE,
+            screen: pages.CONTACTS,//pages.SCHEDULE,
             icon: require('../assets/schedule.png'),
             title: 'Schedule',
             // overrideBackPress: false, // this can be turned to true for android
             // navigatorStyle: {},
           },
-          {
-            icon: require('../assets/labs.png'),
-            screen: pages.SCHEDULE,
-            title: 'Labs',
-            // navigatorStyle: {},
-          },
-          {
-            icon: require('../assets/sponsors.png'),
-            screen: pages.SCHEDULE,
-            title: 'Sponsors',
-            // navigatorStyle: {},
-          },
+          // {
+          //   icon: require('../assets/labs.png'),
+          //   screen: pages.SCHEDULE,
+          //   title: 'Labs',
+          //   // navigatorStyle: {},
+          // },
+          // {
+          //   icon: require('../assets/sponsors.png'),
+          //   screen: pages.SCHEDULE,
+          //   title: 'Sponsors',
+          //   // navigatorStyle: {},
+          // },
           {
             icon: require('../assets/contacts.png'),
-            screen: pages.SCHEDULE,
+            screen: pages.CONTACTS,
             title: 'Contacts',
             // navigatorStyle: {},
           },

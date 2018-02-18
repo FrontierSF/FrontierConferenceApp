@@ -16,14 +16,14 @@ export function loginLoaded() {
   };
 }
 
-export function coinsLoading() {
+export function contactsLoading() {
   return {
-    type: t.COINS_LOADING,
+    type: t.CONTACTS_LOADING,
   };
 }
 
-export function coinsLoaded() {
+export function contactsLoaded() {
   return {
-    type: t.COINS_LOADED,
+    type: t.CONTACTS_LOADED,
   };
 }

@@ -7,9 +7,9 @@ export const isLoginLoading = createSelector(
   loading => loading.login
 );
 
-export const areCoinsLoading = createSelector(
+export const areContactsLoading = createSelector(
   [getLoading],
-  loading => loading.coins
+  loading => loading.contacts
 );
 
 export const isAnythingLoading = createSelector([getLoading], loading => {
