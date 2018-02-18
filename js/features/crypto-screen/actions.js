@@ -44,7 +44,7 @@ export default function fetchContacts(navigator) {
         console.log('Success!!');
         console.log(responseJson);
         dispatch(contactsLoaded());
-        //dispatch(updateContacts(responseJson));
+        dispatch(updateContacts(responseJson));
       })
       .catch(error => {
         console.log('Failure');
