@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { View, Text, Image } from 'react-native';
 
 import BaseContainer from '../../shared/base-container';
 import fetchContacts from './actions';
@@ -8,7 +7,7 @@ import { areContactsLoading } from '../../shared/app/loading/selectors';
 import { getContacts } from './selectors';
 
 import LoadingScreen from '../../shared/app/loading/';
-// import Coins from './component';
+import ContactsList from './ContactsList';
 
 const mapStateToProps = state => ({
   contacts: getContacts(state),
@@ -30,11 +29,7 @@ class ContactScreenContainer extends BaseContainer {
     if (loading) {
       return <LoadingScreen />;
     }
-    return (
-      <View>
-      <Text>Coins Go here</Text>
-      </View>
-    )
+    return <ContactsList contacts={contacts} />;
   }
 }
 
