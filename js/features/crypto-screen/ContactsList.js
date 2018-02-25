@@ -32,7 +32,7 @@ class ContactsList extends React.Component {
     var signresult = tx.sign(privateKey)
     console.log('signresult ', signresult );
     const serializedTx = tx.serialize()
-console.log(serializedTx)
+// console.log(serializedTx)
 console.log('Printing serializedTx.toString: ');
 console.log(serializedTx.toString('hex'))
 console.log('dsofter')
@@ -43,6 +43,21 @@ console.log('dsofter')
     //                    .digest('hex');
     // console.log(hash);
   };
+
+  generateETHWalletAndLogin = (login) => {
+    console.log('generateETHWalletAndLogin hit with login ', login);
+    const privateKey = Buffer.from('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
+    console.log('generateETHWallet testing!!');
+    const privateKeyBuffer = Buffer.from('e8a3c77b968e675d6901496d128669923bc6a8850d9d5d79ee911c3f2d7309c1', 'hex')
+    console.log('privateKeyBuffer is ', privateKeyBuffer);
+    const wallet = EthereumWallet.fromPrivateKey(privateKeyBuffer)
+    console.log('Wallet is ', wallet);
+    console.log('wallet.getPrivateKey is ', wallet.getPrivateKey().toString('hex'))
+    console.log('allet.getAddress is ', wallet.getAddress().toString('hex'))
+    login(wallet.getAddress().toString('hex'), 123456, 'SIDAHARRY20')
+    //loginWithRegCode: () => dispatch(login(props.navigator, ethWalletAddress, userID, regCode)),
+
+  }
 
   renderCoinCards() {
     const { coins } = this.props;
@@ -65,6 +80,9 @@ console.log('dsofter')
   //   );
   // }
   render() {
+    const { login } = this.props;
+
+    console.log('Login passed in via props', login);
     return (
       <ScrollView contentContainerStyle={style.container}>
         <View>
@@ -72,6 +90,18 @@ console.log('dsofter')
         </View>
         <TouchableOpacity onPress={this.generateETHWallet} style={style.textView}>
           <Text style={style.text}>Generate wallet</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {this.generateETHWalletAndLogin(login) }} style={style.textView}>
+          <Text style={style.text}>Enter Reg Code</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.generateETHWallet} style={style.textView}>
+          <Text style={style.text}>Scan QR Code</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.generateETHWallet} style={style.textView}>
+          <Text style={style.text}>Reload Page</Text>
         </TouchableOpacity>
       </ScrollView>
     );

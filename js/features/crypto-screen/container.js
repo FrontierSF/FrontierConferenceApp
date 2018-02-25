@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import BaseContainer from '../../shared/base-container';
-import fetchContacts from './actions';
+import { fetchContacts, login } from './actions';
 import { areContactsLoading } from '../../shared/app/loading/selectors';
 import { getContacts } from './selectors';
 
@@ -16,6 +16,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   fetchContacts: () => dispatch(fetchContacts(props.navigator)),
+  loginWithRegCode: (ethWalletAddress, userID, regCode) => dispatch(login(props.navigator, ethWalletAddress, userID, regCode)),
 });
 
 class ContactScreenContainer extends BaseContainer {
@@ -24,12 +25,12 @@ class ContactScreenContainer extends BaseContainer {
   }
 
   render() {
-    const { contacts, loading } = this.props;
+    const { contacts, loading, loginWithRegCode } = this.props;
     console.log('Contacts are ', contacts);
     if (loading) {
       return <LoadingScreen />;
     }
-    return <ContactsList contacts={contacts} />;
+    return <ContactsList contacts={contacts} login={loginWithRegCode}/>;
   }
 }
 

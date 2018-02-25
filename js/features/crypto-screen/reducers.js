@@ -10,6 +10,7 @@ import t from './actionTypes';
 // Default state. It should never change
 const defaultState = {
   contacts: [],
+  loggedIn: false,
 };
 
 const crypto = (state = defaultState, action) => {
@@ -27,6 +28,10 @@ const crypto = (state = defaultState, action) => {
       console.log('update contacts hit in reducer', action.contacts);
       return Object.assign({}, defaultState, { contacts: action.contacts });
 
+    case t.UPDATE_LOGIN:
+      console.log('update login hit in reducer with action', action);
+      return Object.assign({}, defaultState, { loggedIn: true });
+    case t.REQUEST_LOGIN:
     case t.REQUEST_CONTACTS:
     default:
       return state;

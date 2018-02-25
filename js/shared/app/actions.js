@@ -22,7 +22,7 @@ export function initializeApp(root) {
       Navigation.startTabBasedApp({
         tabs: [
           {
-            screen: pages.CONTACTS,//pages.SCHEDULE,
+            screen: pages.SCHEDULE,
             icon: require('../assets/schedule.png'),
             title: 'Schedule',
             // overrideBackPress: false, // this can be turned to true for android
