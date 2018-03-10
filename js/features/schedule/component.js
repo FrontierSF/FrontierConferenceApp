@@ -4,6 +4,16 @@ import OrangeGradient from './OrangeGradient'
 import Talk from './Talk'
 import PropTypes from 'prop-types';
 
+import DayToggle from './DayToggle'
+
+import {
+  compareAsc,
+  isSameDay,
+  addMinutes,
+  isWithinRange,
+  subMilliseconds
+} from 'date-fns'
+
 import {
   merge,
   groupWith,
@@ -16,7 +26,84 @@ import {
 
 import style from './style';
 
+//AppConfig.js'
+const Config = {
+  // font scaling override - RN default is on
+  allowTextFontScaling: false,
+  // Dates of the conference
+  conferenceDates: ['7/10/2017', '7/11/2017']
+}
+
+const isActiveCurrentDay = (currentTime, activeDay) =>
+  isSameDay(currentTime, new Date(Config.conferenceDates[activeDay]))
+
+const addSpecials = (specialTalksList, talks) =>
+  map((talk) => assoc('special', contains(talk.title, specialTalksList), talk), talks)
+
 class Schedule extends React.Component {
+  constructor (props) {
+    super(props)
+
+    const { schedule, currentTime } = props;//specialTalks,
+    const eventsByDay = this.getEventsByDayFromSchedule(schedule)
+    const activeDay = 0
+    const data = eventsByDay[activeDay]//addSpecials(specialTalks, eventsByDay[activeDay])
+    const isCurrentDay = isActiveCurrentDay(currentTime, activeDay)
+    // const appState = AppState.currentState
+
+    // TODO now I need to make this based on data
+    this.state = { eventsByDay, activeDay, data }//{eventsByDay, data, isCurrentDay, activeDay, appState}
+  }
+
+  // Move this up a level or think about this later
+  setActiveDay = (activeDay) => {
+    const { eventsByDay } = this.state
+    const { currentTime, specialTalks } = this.props
+    const data = eventsByDay[activeDay]
+    const isCurrentDay = isActiveCurrentDay(currentTime, activeDay)
+
+    this.setState({data, activeDay, isCurrentDay}, () => {
+      if (isCurrentDay) {
+        // Scroll to active
+        const index = this.getActiveIndex(data)
+        this.refs.scheduleList.scrollToIndex({index, animated: false})
+      } else {
+        // Scroll to top
+        this.refs.scheduleList.scrollToOffset({y: 0, animated: false})
+      }
+    })
+  }
+
+  getEventsByDayFromSchedule = (schedule) => {
+    const mergeTimes = (e) => {
+      const eventDuration = Number(e.duration)
+      const eventStart = new Date(e.time)
+      const eventFinal = addMinutes(eventStart, eventDuration)
+      // ends 1 millisecond before event
+      const eventEnd = subMilliseconds(eventFinal, 1)
+
+      return merge(e, { eventStart, eventEnd, eventDuration, eventFinal })
+    }
+    const sorted = [...schedule].map(mergeTimes).sort((a, b) => {
+      return compareAsc(a.eventStart, b.eventStart)
+    })
+    return groupWith((a, b) => isSameDay(a.eventStart, b.eventStart), sorted)
+  }
+
+  getActiveIndex = (data) => {
+    const { currentTime } = this.props
+    const foundIndex = findIndex((i) => isWithinRange(currentTime, i.eventStart, i.eventEnd))(data)
+
+    // handle pre-event and overscroll
+    if (foundIndex < 0) {
+      return 0
+    } else if (foundIndex > data.length - 3) {
+      return data.length - 3
+    } else {
+      return foundIndex
+    }
+  }
+
   renderItem = ({item}) => {
     const isCurrentDay = false
     // const { isCurrentDay } = this.state
@@ -64,9 +151,14 @@ class Schedule extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { activeDay, data } = this.state;
+    const { schedule } = this.props;
     return (
       <OrangeGradient style={style.linearGradient}>
+        <DayToggle
+          activeDay={activeDay}
+          onPressIn={this.setActiveDay}
+          />
         <FlatList
           ref='scheduleList'
           data={data}

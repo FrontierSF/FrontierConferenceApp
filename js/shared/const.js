@@ -6,6 +6,7 @@ export const cyptoAPIBaseURL = 'http://165.227.49.49/app/';
 export const navigatorStyle = {
   navBarBackgroundColor: 'white',
   navBarTextColor: 'black',
+  navBarHidden: true,
   navBarSubtitleTextColor: 'blue',
   statusBarTextColorScheme: 'light',
   navBarButtonColor: isAndroid() ? 'transparent' : 'black',

@@ -26,7 +26,7 @@ export function initializeApp(root) {
             icon: require('../assets/schedule.png'),
             title: 'Schedule',
             // overrideBackPress: false, // this can be turned to true for android
-            // navigatorStyle: {},
+            navigatorStyle: {navBarHidden: true},
           },
           // {
           //   icon: require('../assets/labs.png'),
@@ -44,7 +44,7 @@ export function initializeApp(root) {
             icon: require('../assets/contacts.png'),
             screen: pages.CONTACTS,
             title: 'Contacts',
-            // navigatorStyle: {},
+            navigatorStyle: {navBarHidden: true},
           },
         ],
         tabsStyle: {

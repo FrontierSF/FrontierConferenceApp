@@ -7,8 +7,24 @@ import Schedule from './component';
 
 const data = require('./schedule.json')
 
+//AppConfig.js'
+const Config = {
+  // font scaling override - RN default is on
+  allowTextFontScaling: false,
+  // Dates of the conference
+  conferenceDates: ['7/10/2017', '7/11/2017']
+}
+
+const firstDay = new Date(Config.conferenceDates[0])
+let initialTime = new Date()
+initialTime.setFullYear(firstDay.getFullYear())
+initialTime.setMonth(firstDay.getMonth())
+initialTime.setDate(firstDay.getDate())
+
 const mapStateToProps = state => ({
-  data: data.schedule
+  schedule: data.schedule,
+  currentTime: initialTime//new Date(state.schedule.currentTime),
+  // specialTalks: state.notifications.specialTalks
 });
 
 const mapDispatchToProps = dispatch => ({
