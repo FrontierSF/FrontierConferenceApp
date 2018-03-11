@@ -4,6 +4,7 @@ import ErrorContainer from './error';
 import EntryContainer from '../features/entry-screen/container';
 import ContactScreenContainer from '../features/crypto-screen/container';
 import ScheduleContainer from '../features/schedule';
+import TalkDetailScreenContainer from '../features/talk-detail-screen/container'
 import pages from '../navigation/pages';
 
 const pageMap = [
@@ -11,6 +12,7 @@ const pageMap = [
   { id: pages.ENTRY, component: EntryContainer },
   { id: pages.ERROR, component: ErrorContainer },
   { id: pages.SCHEDULE, component: ScheduleContainer },
+  { id: pages.DETAILS, component: TalkDetailScreenContainer },
   { id: pages.CONTACTS, component: ContactScreenContainer },
 ];
 

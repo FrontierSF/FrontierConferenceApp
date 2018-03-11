@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import RehydrationServices from '../services/RehydrationServices';
 import schedule from '../features/schedule/reducer';
 import crypto from '../features/crypto-screen/reducers';
+import talkDetails from '../features/talk-detail-screen/reducers';
 import app from '../shared/app/reducers';
 import loading from '../shared/app/loading/reducers';
 import error from '../shared/error/reducers';
@@ -16,7 +17,8 @@ const appReducer = combineReducers({
   error,
   loading,
   schedule,
-  crypto
+  crypto,
+  talkDetails
 });
 
 const reducers = (state, action) =>

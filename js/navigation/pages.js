@@ -5,6 +5,7 @@ const commonPages = {
   ENTRY: 'welcome',
   ERROR: 'error',
   SCHEDULE: 'schedule',
+  DETAILS: 'details',
   CONTACTS: 'contacts',
 };
 

@@ -4,18 +4,11 @@ import React from 'react';
 import BaseContainer from '../../shared/base-container'
 
 import Schedule from './component';
-
+import selectTalk from '../talk-detail-screen/actions'
+import { AppConfig } from '../../themes'
 const data = require('./schedule.json')
 
-//AppConfig.js'
-const Config = {
-  // font scaling override - RN default is on
-  allowTextFontScaling: false,
-  // Dates of the conference
-  conferenceDates: ['7/10/2017', '7/11/2017']
-}
-
-const firstDay = new Date(Config.conferenceDates[0])
+const firstDay = new Date(AppConfig.conferenceDates[0])
 let initialTime = new Date()
 initialTime.setFullYear(firstDay.getFullYear())
 initialTime.setMonth(firstDay.getMonth())
@@ -28,10 +21,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    setSelectedTalk: talk => dispatch(selectTalk(talk)),
 });
 
 class ScheduleContainer extends BaseContainer {
   render() {
+    console.log('The function is defined ', selectTalk);
     return <Schedule {...this.props} />;
   }
 }

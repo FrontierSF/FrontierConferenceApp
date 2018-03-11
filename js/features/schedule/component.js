@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, TouchableOpacity, Image, FlatList, Alert } from 'react-native';
 import OrangeGradient from './OrangeGradient'
 import Talk from './Talk'
+import pages from '../../navigation/pages'
+
 import PropTypes from 'prop-types';
 
 import DayToggle from './DayToggle'
@@ -26,16 +28,10 @@ import {
 
 import style from './style';
 
-//AppConfig.js'
-const Config = {
-  // font scaling override - RN default is on
-  allowTextFontScaling: false,
-  // Dates of the conference
-  conferenceDates: ['7/10/2017', '7/11/2017']
-}
+import { AppConfig } from '../../themes'
 
 const isActiveCurrentDay = (currentTime, activeDay) =>
-  isSameDay(currentTime, new Date(Config.conferenceDates[activeDay]))
+  isSameDay(currentTime, new Date(AppConfig.conferenceDates[activeDay]))
 
 const addSpecials = (specialTalksList, talks) =>
   map((talk) => assoc('special', contains(talk.title, specialTalksList), talk), talks)
@@ -104,13 +100,22 @@ class Schedule extends React.Component {
     }
   }
 
+  onEventPress = (item) => {
+            // onPress={() => { this.props.navigator.push({ screen: pages.DETAILS, title: pages.DETAILS, backButtonTitle: '' })} }
+    const { navigator, setSelectedTalk } = this.props
+    setSelectedTalk(item)
+    navigator.push({ screen: pages.DETAILS, title: pages.DETAILS, backButtonTitle: '' })
+    // item.type === 'talk'
+    //   ? navigation.navigate('TalkDetail')
+    //   : navigation.navigate('BreakDetail')
+  }
   renderItem = ({item}) => {
     const isCurrentDay = false
     // const { isCurrentDay } = this.state
     const { currentTime, setReminder, removeReminder } = this.props
     const { eventDuration, eventStart, eventEnd, eventFinal, special } = item
-    const isActive = false//isWithinRange(currentTime, eventStart, eventEnd)
-    const isFinished = true//currentTime > eventEnd
+    const isActive = isWithinRange(currentTime, eventStart, eventEnd)
+    const isFinished = currentTime > eventEnd
     //if (item.type === 'talk') {
     return (
       <Talk
@@ -120,7 +125,7 @@ class Schedule extends React.Component {
         title={item.title}
         start={eventStart}
         duration={eventDuration}
-        onPress={() => {} }
+        onPress={() => this.onEventPress(item)}
         onPressTwitter={() => {}}
         onPressGithub={() => {}}
         setReminder={() => {}}
