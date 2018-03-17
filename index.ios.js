@@ -1,4 +1,4 @@
-import './shim'
+// import './shim'
 import Root from "./js/root";
 
 console.disableYellowBox = true;

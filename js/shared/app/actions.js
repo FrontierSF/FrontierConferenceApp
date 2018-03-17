@@ -15,7 +15,7 @@ export function initializeApp(root) {
       Navigation.startSingleScreenApp({
         screen: {
           screen: pages.INITIAL,
-          navigatorStyle,
+          navigatorStyle: { navBarHidden: true }
         },
       });
     } else if (root === navTypes.tab) {
@@ -105,8 +105,10 @@ export function getStartScreen(navigator) {
  * have finished.
  */
 function getInitialPage() {
+  //TODO: Check secure storate or what ever to see if user has logged in
+  // or not.
   // Determine what page to display
-  return getNavScreen(pages.ENTRY);
+  return getNavScreen(pages.REG);
 }
 
 function processOpenUrl(url, dispatch) {

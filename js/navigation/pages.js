@@ -7,6 +7,7 @@ const commonPages = {
   SCHEDULE: 'schedule',
   DETAILS: 'details',
   CONTACTS: 'contacts',
+  REG: 'reg',
 };
 
 const pages = Object.assign({}, commonPages);

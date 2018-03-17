@@ -15,7 +15,7 @@ class Root {
   }
 
   _startApp = () => {
-    store.dispatch(initializeApp(navTypes.tab));
+    store.dispatch(initializeApp(navTypes.single));
   };
 }
 

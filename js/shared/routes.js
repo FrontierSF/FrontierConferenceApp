@@ -2,6 +2,7 @@
 import InitialScreenContainer from './app/initial-screen';
 import ErrorContainer from './error';
 import EntryContainer from '../features/entry-screen/container';
+import RegScreenContainer from '../features/reg-screen/container';
 import ContactScreenContainer from '../features/crypto-screen/container';
 import ScheduleContainer from '../features/schedule';
 import TalkDetailScreenContainer from '../features/talk-detail-screen/container'
@@ -14,6 +15,7 @@ const pageMap = [
   { id: pages.SCHEDULE, component: ScheduleContainer },
   { id: pages.DETAILS, component: TalkDetailScreenContainer },
   { id: pages.CONTACTS, component: ContactScreenContainer },
+  { id: pages.REG, component: RegScreenContainer },
 ];
 
 export default pageMap;

@@ -25,7 +25,7 @@ export function isEmptyVar(input) {
  * Helper method to convert a page into a nav page
  */
 export function getNavScreen(page) {
-  return { screen: page, title: page, backButtonTitle: '' };
+  return { screen: page, title: page, backButtonTitle: '', navigatorStyle: { navBarHidden: true } };
 }
 
 /**

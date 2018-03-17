@@ -4,7 +4,7 @@ import { BackHandler, ScrollView, Text, View, Image, TouchableOpacity } from 're
 
 import BaseContainer from '../../shared/base-container';
 
-import OrangeGradient from '../schedule/OrangeGradient'
+import OrangeGradient from '../../shared/components/OrangeGradient'
 import TalkInfo from '../schedule/TalkInfo'
 import { contains } from 'ramda'
 import LoadingScreen from '../../shared/app/loading/';

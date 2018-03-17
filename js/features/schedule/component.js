@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, FlatList, Alert } from 'react-native';
-import OrangeGradient from './OrangeGradient'
+import OrangeGradient from '../../shared/components/OrangeGradient'
 import Talk from './Talk'
 import pages from '../../navigation/pages'
 
