@@ -7,8 +7,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+  error: {
+    color: 'white',
+    backgroundColor:'rgba(0,0,0,0)',
+    fontStyle: 'italic',
+    fontWeight: 'normal'
+  },
   logo: {
-    marginBottom: 20
+    marginBottom: 25
   },
   textView: {
     padding: 6,

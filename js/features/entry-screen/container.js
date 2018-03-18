@@ -8,6 +8,7 @@ import pages from '../../navigation/pages';
 import { getNavScreen } from '../../utils';
 import Entry from './component';
 
+
 const mapStateToProps = state => ({
   name: state.app.appName,
 });

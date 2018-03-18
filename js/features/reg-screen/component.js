@@ -13,17 +13,27 @@ import style from './style';
 const width = Dimensions.get('window').width;
 
 class RegScreen extends React.Component {
-  //this.setState({text})
+  constructor(props) {
+    super(props);
+    this.state = {
+      validRegCode: false,
+      displayError: false
+    }
+  }
+
   render() {
-    const { goToTab } = this.props;
+    const { goToTab, regCodeIsValid } = this.props;
+    const { validRegCode, displayError } = this.state;
+    const buttonColor = validRegCode ? Colors.orange : Colors.bloodOrange
     const widthInput = width * 0.65
-    // 1) Check if input in state is valid and
-    //
+
     return (
       <OrangeGradient style={style.container}>
         <Image style={style.logo} source={require('../../shared/assets/footerlogo.png')} />
+
+        {displayError ? <Text style={style.error}>Invalid registration code!</Text> : null}
         <Sae
-          style={{ width: (widthInput-10), marginTop: 10, marginBottom: 20}}
+          style={{ width: (widthInput-10), marginBottom: 20}}
           label={'Registration Code'}
           iconClass={FontAwesomeIcon}
           iconName={'pencil'}
@@ -31,7 +41,12 @@ class RegScreen extends React.Component {
           labelStyle={{ color: 'white', fontStyle: 'italic', fontWeight: 'normal' }}
           inputStyle={{ color: 'white' }}
           keyboardType="numeric"
-          onChangeText={(text) => { console.log('Keyboard changed ', text);}}
+          onChangeText={(text) => {
+            this.setState({
+              displayError: false,
+              validRegCode: regCodeIsValid(text)
+            });
+          }}
           // TextInput props
           autoCapitalize={'none'}
           autoCorrect={false}
@@ -39,8 +54,17 @@ class RegScreen extends React.Component {
         <Button
           raised
           containerViewStyle={{width:widthInput}}
-          color={Colors.orange}
-          onPress={goToTab}
+          color={buttonColor}
+          onPress={
+            () => {
+              if (validRegCode) {
+                goToTab()
+              }
+              this.setState({
+                displayError:true
+              });
+            }
+          }
           borderRadius={10}
           backgroundColor='white'
           title='Sign In' />
@@ -52,6 +76,7 @@ class RegScreen extends React.Component {
 
 RegScreen.propTypes = {
   goToTab: PropTypes.func.isRequired,
+  regCodeIsValid: PropTypes.func.isRequired,
 };
 
 export default RegScreen;

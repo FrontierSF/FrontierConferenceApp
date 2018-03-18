@@ -6,6 +6,8 @@ import { initializeApp } from '../../shared/app/actions';
 import { navTypes } from '../../shared/const';
 import RegScreen from './component';
 
+const regCodes = require('./regCodes.json')
+
 const mapStateToProps = state => ({
 });
 
@@ -14,6 +16,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class RegScreenContainer extends BaseContainer {
+  regCodeIsValid = (regCode) => {
+    return regCode in regCodes
+  };
   goToTabs = () => {
     this.props.goToTabs();
   };
@@ -21,6 +26,7 @@ class RegScreenContainer extends BaseContainer {
     return (
       <RegScreen
         name={this.props.name}
+        regCodeIsValid={this.regCodeIsValid}
         goToTab={this.goToTabs}
       />
     );
