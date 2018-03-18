@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Alert, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { Text, View, Alert, TouchableOpacity,TouchableWithoutFeedback, Image, Dimensions, Keyboard } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
@@ -39,30 +39,31 @@ class RegScreen extends React.Component {
                       color="white"/>)
     return (
       <OrangeGradient style={style.container}>
-        <Image style={style.logo} source={require('../../shared/assets/footerlogo.png')} />
-
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <Image style={style.logo} source={require('../../shared/assets/footerlogo.png')} />
+        </TouchableWithoutFeedback>
         {displayError ? <Text style={style.error}>Invalid registration code!</Text> : null}
         <View style={{flexDirection: 'row', backgroundColor:'rgba(0,0,0,0)', alignItems: 'center'}} >
-        <Sae
-          style={{ width: (widthInput-60), marginBottom: 20}}
-          label={'Registration Code'}
-          iconClass={FontAwesomeIcon}
-          iconName={'pencil'}
-          iconColor={'white'}
-          labelStyle={{ color: 'white', fontStyle: 'italic', fontWeight: 'normal' }}
-          inputStyle={{ color: 'white' }}
-          keyboardType="numeric"
-          onChangeText={(text) => {
-            this.setState({
-              displayError: false,
-              validRegCode: regCodeIsValid(text)
-            });
-          }}
-          // TextInput props
-          autoCapitalize={'none'}
-          autoCorrect={false}
-        />
-        {infoIcon}
+          <Sae
+            style={{ width: (widthInput-60), marginBottom: 20}}
+            label={'Registration Code'}
+            iconClass={FontAwesomeIcon}
+            iconName={'pencil'}
+            iconColor={'white'}
+            labelStyle={{ color: 'white', fontStyle: 'italic', fontWeight: 'normal' }}
+            inputStyle={{ color: 'white' }}
+            keyboardType="numeric"
+            onChangeText={(text) => {
+              this.setState({
+                displayError: false,
+                validRegCode: regCodeIsValid(text)
+              });
+            }}
+            // TextInput props
+            autoCapitalize={'none'}
+            autoCorrect={false}
+          />
+          {infoIcon}
         </View>
 
         <Button
@@ -82,7 +83,6 @@ class RegScreen extends React.Component {
           borderRadius={10}
           backgroundColor='white'
           title='Sign In' />
-
       </OrangeGradient>
     );
   }
