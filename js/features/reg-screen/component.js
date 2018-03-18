@@ -19,13 +19,14 @@ class RegScreen extends React.Component {
     super(props);
     this.state = {
       validRegCode: false,
-      displayError: false
+      displayError: false,
+      displayValidCode: false
     }
   }
 
   render() {
     const { goToTab, regCodeIsValid } = this.props;
-    const { validRegCode, displayError } = this.state;
+    const { validRegCode, displayError, displayValidCode } = this.state;
     const buttonColor = validRegCode ? Colors.orange : Colors.bloodOrange
     const widthInput = width * 0.65
     const infoIcon = (<FeatherIcon
@@ -43,6 +44,7 @@ class RegScreen extends React.Component {
           <Image style={style.logo} source={require('../../shared/assets/footerlogo.png')} />
         </TouchableWithoutFeedback>
         {displayError ? <Text style={style.error}>Invalid registration code!</Text> : null}
+        {displayValidCode ? <Text style={style.error}>Registration code is valid!</Text> : null}
         <View style={{flexDirection: 'row', backgroundColor:'rgba(0,0,0,0)', alignItems: 'center'}} >
           <Sae
             style={{ width: (widthInput-60), marginBottom: 20}}
@@ -56,6 +58,7 @@ class RegScreen extends React.Component {
             onChangeText={(text) => {
               this.setState({
                 displayError: false,
+                displayValidCode: regCodeIsValid(text),
                 validRegCode: regCodeIsValid(text)
               });
             }}
@@ -76,7 +79,8 @@ class RegScreen extends React.Component {
                 goToTab()
               }
               this.setState({
-                displayError:true
+                displayError:true,
+                displayValidCode: false
               });
             }
           }
