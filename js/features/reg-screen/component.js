@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { Text, View, Alert, TouchableOpacity, Image, Dimensions } from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+
 import { Sae } from 'react-native-textinput-effects';
 
 import PropTypes from 'prop-types';
@@ -26,14 +28,23 @@ class RegScreen extends React.Component {
     const { validRegCode, displayError } = this.state;
     const buttonColor = validRegCode ? Colors.orange : Colors.bloodOrange
     const widthInput = width * 0.65
-
+    const infoIcon = (<FeatherIcon
+                      style={{marginLeft:14, marginTop: 19}}name="info" size={28}
+                      onPress={() => {
+                        Alert.alert(
+                          'Registration Code',
+                          'The registration code should be in your email from Frontier.'
+                        )
+                      }}
+                      color="white"/>)
     return (
       <OrangeGradient style={style.container}>
         <Image style={style.logo} source={require('../../shared/assets/footerlogo.png')} />
 
         {displayError ? <Text style={style.error}>Invalid registration code!</Text> : null}
+        <View style={{flexDirection: 'row', backgroundColor:'rgba(0,0,0,0)', alignItems: 'center'}} >
         <Sae
-          style={{ width: (widthInput-10), marginBottom: 20}}
+          style={{ width: (widthInput-60), marginBottom: 20}}
           label={'Registration Code'}
           iconClass={FontAwesomeIcon}
           iconName={'pencil'}
@@ -51,6 +62,9 @@ class RegScreen extends React.Component {
           autoCapitalize={'none'}
           autoCorrect={false}
         />
+        {infoIcon}
+        </View>
+
         <Button
           raised
           containerViewStyle={{width:widthInput}}
