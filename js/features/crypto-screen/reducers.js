@@ -10,7 +10,10 @@ import t from './actionTypes';
 // Default state. It should never change
 const defaultState = {
   contacts: [],
+  user: {},
+  locallyLoggedIn: false,
   loggedIn: false,
+  wallet:''
 };
 
 const crypto = (state = defaultState, action) => {
@@ -27,7 +30,13 @@ const crypto = (state = defaultState, action) => {
     case t.UPDATE_CONTACTS:
       console.log('update contacts hit in reducer', action.contacts);
       return Object.assign({}, defaultState, { contacts: action.contacts });
-
+    case t.STORE_WALLET:
+      console.log('Store wallet hit with!!! ', action);
+      // TODO: this needs to be stored in a sercure place
+      return Object.assign({}, defaultState, { wallet: action.wallet });
+    case t.UPDATE_LOGIN_LOCAL:
+      console.log('update UPDATE_LOGIN_LOCAL hit in reducer with action', action);
+      return Object.assign({}, defaultState, { locallyLoggedIn: true, user: action.user });
     case t.UPDATE_LOGIN:
       console.log('update login hit in reducer with action', action);
       return Object.assign({}, defaultState, { loggedIn: true });

@@ -76,7 +76,21 @@ export function login(navigator, ethWalletAddress, userID, regCode) {
 }
 
 /**
- * Store Login status object. clean this up
+ * generate eth wallet
+ */
+export function generateWallet() {
+  // 1) Use whatever libraries to generate the wallet
+  const wallet = 'ssdasdasdasdsadsdsd12'
+  return dispatch => {
+    dispatch({
+      type: t.STORE_WALLET,
+      wallet,
+    });
+  }
+}
+
+/**
+ * Store remote Login status object. clean this up
  */
 function updateLogin(status) {
   return dispatch => {
@@ -86,6 +100,21 @@ function updateLogin(status) {
     });
   };
 }
+
+/**
+ * If the user logs in locally, i.e has a valid regCode.
+ */
+export function loginLocally(user) {
+  console.log('loginLocally hit with ', user);
+  return dispatch => {
+    dispatch({
+      type: t.UPDATE_LOGIN_LOCAL,
+      user,
+    });
+  };
+}
+//
+
 /**
  * Store contacts object
  */

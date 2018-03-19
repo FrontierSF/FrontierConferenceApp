@@ -20,13 +20,14 @@ class RegScreen extends React.Component {
     this.state = {
       validRegCode: false,
       displayError: false,
-      displayValidCode: false
+      displayValidCode: false,
+      regCode: ''
     }
   }
 
   render() {
-    const { goToTab, regCodeIsValid } = this.props;
-    const { validRegCode, displayError, displayValidCode } = this.state;
+    const { goToTab, regCodeIsValid, login } = this.props;
+    const { validRegCode, displayError, displayValidCode, regCode } = this.state;
     const buttonColor = validRegCode ? Colors.orange : Colors.bloodOrange
     const widthInput = width * 0.65
     const infoIcon = (<FeatherIcon
@@ -59,6 +60,7 @@ class RegScreen extends React.Component {
               this.setState({
                 displayError: false,
                 displayValidCode: regCodeIsValid(text),
+                regCode: text,
                 validRegCode: regCodeIsValid(text)
               });
             }}
@@ -76,6 +78,7 @@ class RegScreen extends React.Component {
           onPress={
             () => {
               if (validRegCode) {
+                login(regCode)
                 goToTab()
               }
               this.setState({
@@ -93,6 +96,7 @@ class RegScreen extends React.Component {
 }
 
 RegScreen.propTypes = {
+  login: PropTypes.func.isRequired,
   goToTab: PropTypes.func.isRequired,
   regCodeIsValid: PropTypes.func.isRequired,
 };
