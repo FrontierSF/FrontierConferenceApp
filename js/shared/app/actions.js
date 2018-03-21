@@ -1,16 +1,17 @@
 import { Navigation } from 'react-native-navigation';
 import { AppState, Linking } from 'react-native';
-// import PushNotification from 'react-native-push-notification';
 
 import { navigatorStyle, navTypes } from '../const';
 
 import t from './actionTypes';
 
 import { getNavScreen, checkPageValid } from '../../utils';
+import getIcons from '../../navigation/icons';
 import pages from '../../navigation/pages';
 
 export function initializeApp(root) {
-  return dispatch => {
+  return async (dispatch) => {
+    const icons = await getIcons;
     if (root === navTypes.single) {
       Navigation.startSingleScreenApp({
         screen: {
@@ -23,7 +24,9 @@ export function initializeApp(root) {
         tabs: [
           {
             screen: pages.SCHEDULE,
-            icon: require('../assets/schedule.png'),
+            // icon: require('../assets/schedule.png'),
+            icon: icons.calendar,
+            selectedIcon: icons.calendar,
             title: 'Schedule',
             // overrideBackPress: false, // this can be turned to true for android
             navigatorStyle: {navBarHidden: true},
@@ -41,7 +44,8 @@ export function initializeApp(root) {
           //   // navigatorStyle: {},
           // },
           {
-            icon: require('../assets/contacts.png'),
+            icon: icons.vcard,
+						selectedIcon: icons.vcard,
             screen: pages.CONTACTS,
             title: 'Contacts',
             navigatorStyle: {navBarHidden: true},
