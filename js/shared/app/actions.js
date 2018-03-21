@@ -24,6 +24,7 @@ export function initializeApp(root) {
         tabs: [
           {
             screen: pages.SCHEDULE,
+            label: 'Schedule',
             // icon: require('../assets/schedule.png'),
             icon: icons.calendar,
             selectedIcon: icons.calendar,
@@ -45,6 +46,7 @@ export function initializeApp(root) {
           // },
           {
             icon: icons.vcard,
+            label: 'Contacts',
 						selectedIcon: icons.vcard,
             screen: pages.CONTACTS,
             title: 'Contacts',
