@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "postinstall": "./scripts/camera.sh",  
     "prettier": "find . -name node_modules -prune -or -name '*.js' -print | xargs prettier --write",
     "install-linters": "npm install -g eslint eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-import eslint-config-airbnb babel-eslint eslint-plugin-class-property",
     "lint": "eslint ."
@@ -23,10 +24,12 @@
     "ramda": "^0.25.0",
     "react": "16.0.0-beta.5",
     "react-native": "0.50",
+    "react-native-camera": "1.0.2",
     "react-native-elements": "^0.19.0",
     "react-native-fade-in-image": "^1.3.0",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-navigation": "^1.1.229",
+    "react-native-qrcode-scanner": "0.0.30",
     "react-native-randombytes": "^3.0.0",
     "react-native-textinput-effects": "^0.4.2",
     "react-native-vector-icons": "^4.5.0",

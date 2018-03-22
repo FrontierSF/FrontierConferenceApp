@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import QRCodeScanner from 'react-native-qrcode-scanner';
+
 // import EthereumTx from 'ethereumjs-tx'
 // import EthereumWallet from 'ethereumjs-wallet'
 // const EthereumTx = require('ethereumjs-tx')
@@ -7,6 +9,11 @@ import PropTypes from 'prop-types';
 import style from './style';
 
 class ContactsList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.onSuccess.bind(this)
+  }
+
   generateETHWallet = () => {
     // const privateKey = Buffer.from('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
     // console.log('generateETHWallet testing!!');
@@ -72,6 +79,12 @@ class ContactsList extends React.Component {
       />
     ));
   }
+
+  onSuccess(e) {
+    console.log('Scan scan!!! ');
+    console.log(e);
+    // Linking.openURL(e.data).catch(err => console.error('An error occured', err));
+  }
   // render() {
   //   return (
   //     <ScrollView contentContainerStyle={style.container}>
@@ -103,6 +116,7 @@ class ContactsList extends React.Component {
         <TouchableOpacity onPress={this.generateETHWallet} style={style.textView}>
           <Text style={style.text}>Reload Page</Text>
         </TouchableOpacity>
+        <QRCodeScanner onRead={this.onSuccess}/>
       </ScrollView>
     );
   }
